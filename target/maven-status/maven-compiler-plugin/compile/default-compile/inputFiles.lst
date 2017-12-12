@@ -1,0 +1,15 @@
+/home/excilys/eclipse-workspace/computer_database/src/main/java/services/CompanyServices.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/bean/Computer.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/singleton/SingCompanyServices.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/connection/ConnectionDB.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/singleton/SingComputerServices.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/servlets/MyServlet.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/dto/ComputerDTO.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/dao/CompanyDAO.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/singleton/SingComputerDAO.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/dao/ComputerDAO.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/ComputerDataBase.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/services/ComputerServices.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/bean/Company.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/singleton/SingCompanyDAO.java
+/home/excilys/eclipse-workspace/computer_database/src/main/java/mapper/ComputerMapper.java
