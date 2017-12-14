@@ -46,7 +46,9 @@ public class ComputerDAO {
 
 	public List<Computer> findSearch(String search) {
 
-		List<Computer> listpc = (List<Computer>) jdbcTemplate.query(SELECTCOMPUTER+"where name like '%"+search+"%' or company_id = (select id from company where name like '%"+search+"%')", new ComputerMapper());
+		List<Computer> listpc = (List<Computer>) jdbcTemplate.query
+				(SELECTCOMPUTER+"where name like '%"+search+"%' or company_id = (select id from company where name like '%"+search+"%')"
+						, new ComputerMapper());
 
 		return listpc;
 	}
@@ -60,7 +62,8 @@ public class ComputerDAO {
 
 	public Computer update(Computer computer) {
 
-		jdbcTemplate.update(UPDATECOMPUTER+" name = ?, introduced = ?, discontinued = ?, company_id = ? where id = ?", computer.getNom(), computer.getIntroduced(), computer.getDiscontinued(), computer.getCompanyId(), computer.getId());
+		jdbcTemplate.update(UPDATECOMPUTER+" name = ?, introduced = ?, discontinued = ?, company_id = ? where id = ?",
+				computer.getNom(), computer.getIntroduced(), computer.getDiscontinued(), computer.getCompanyId(), computer.getId());
 
 		return computer;
 	}
