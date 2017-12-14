@@ -9,16 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import model.Computer;
 import model.ComputerMapper;
-/*
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- */
 
 @Repository
 public class ComputerDAO {
