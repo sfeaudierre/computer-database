@@ -11,7 +11,7 @@ import dto.ComputerDTO;
 import model.Computer;
 
 @Component
-public class ComputerMapper{
+public class ComputerDtoMapper{
 	
 	public ComputerDTO computerToDto (Computer computer) {
 		

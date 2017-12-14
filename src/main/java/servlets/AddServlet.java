@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import configuration.AppConfig;
 import dto.ComputerDTO;
-import mapper.ComputerMapper;
+import mapper.ComputerDtoMapper;
 import model.Company;
 import model.Computer;
 import services.CompanyServices;
@@ -26,6 +26,11 @@ import services.ComputerServices;
 @Component
 public class AddServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Logger logger = LoggerFactory.getLogger(DashboardServlet.class);
 
 	@Autowired
@@ -33,8 +38,9 @@ public class AddServlet extends HttpServlet {
 	@Autowired
 	private ComputerServices computerServices;
 	@Autowired
-	private ComputerMapper mapper;
+	private ComputerDtoMapper mapper;
 
+	@SuppressWarnings("resource")
 	public void init() {
 		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		context.getAutowireCapableBeanFactory().autowireBean(this);
