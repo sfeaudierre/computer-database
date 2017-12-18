@@ -23,7 +23,7 @@
                     </div>
                     <h1>Edit Computer</h1>
 
-                    <form action="editcomputer?action=edit" name="form" id="form" method="POST">
+                    <form action="editComputer?action=edit" name="form" id="form" method="POST">
                         <input type="hidden" value="${pcDto.id}" id="id" name="id"/> <!-- TODO: Change this value with the computer id -->
                         <fieldset>
                             <div class="form-group">
