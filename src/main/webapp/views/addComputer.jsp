@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
@@ -15,29 +16,32 @@
         <div class="container">
             <a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
         </div>
+        <div class="navbar-brand" style="margin-top:-50px;margin-left:67%;">
+			Language : <a href="?lang=en">English</a> | <a href="?lang=fr">French</a>
+		</div>
     </header>
 
     <section id="main">
         <div class="container">
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-2 box">
-                    <h1>Add Computer</h1>
+                    <h1>${addComputerTitle}</h1>
                     <form:form modelAttribute="addForm" action="addComputer?action=add" name="form" id="form" method="POST">
                         <fieldset>
                             <div class="form-group">
-                                <label for="computerName">Computer name</label>
-                                <form:input type="text" class="form-control" path="computerName" name="computerName" id="computerName" placeholder="Computer name"/>
+                                <label for="computerName">${addComputerName}</label>
+                                <form:input type="text" class="form-control" path="computerName" name="computerName" id="computerName" placeholder="${addComputerName}"/>
                             </div>
                             <div class="form-group">
-                                <label for="introduced">Introduced date</label>
-                                <form:input type="date" class="form-control" path="introduced" name="introduced" id="introduced" placeholder="Introduced date"/>
+                                <label for="introduced">${addComputerIntroduced}</label>
+                                <form:input type="date" class="form-control" path="introduced" name="introduced" id="introduced" placeholder="${addComputerIntroduced}"/>
                             </div>
                             <div class="form-group">
-                                <label for="discontinued">Discontinued date</label>
-                                <form:input type="date" class="form-control" path="discontinued" name="discontinued" id="discontinued" placeholder="Discontinued date"/>
+                                <label for="discontinued">${addComputerDiscontinued}</label>
+                                <form:input type="date" class="form-control" path="discontinued" name="discontinued" id="discontinued" placeholder="${addComputerDiscontinued}"/>
                             </div>
                             <div class="form-group">
-                                <label for="companyId">Company</label>
+                                <label for="companyId">${addComputerCompany}</label>
                                 <form:select class="form-control" path="companyId" name="companyId" id="companyId" >
                                		<c:forEach items="${listcp}" var="cp">
                                     	<option value="${cp.id}"><c:out value="${cp.nom}"></c:out></option>
@@ -46,9 +50,9 @@
                             </div>                  
                         </fieldset>
                         <div class="actions pull-right">
-                            <input type="submit" value="Add" class="btn btn-primary">
-                            or
-                            <a href="dashboard" class="btn btn-default">Cancel</a>
+                            <input type="submit" value="${add}" class="btn btn-primary">
+                            ${ou}
+                            <a href="dashboard" class="btn btn-default">${cancel}</a>
                         </div>
                     </form:form>
                     <script>

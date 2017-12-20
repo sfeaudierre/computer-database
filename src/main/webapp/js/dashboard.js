@@ -45,14 +45,33 @@ $(function() {
 (function ( $ ) {
 
     $.fn.toggleEditMode = function() {
-        if($(".editMode").is(":visible")) {
-            $(".editMode").hide();
-            $("#editComputer").text("Edit");
-        }
-        else {
-            $(".editMode").show();
-            $("#editComputer").text("View");
-        }
+    	
+    	var cookie = document.cookie;
+    	var lang = cookie.substring(cookie.lastIndexOf("=")+1);
+    	
+    	switch (lang) {
+    	case "en":
+    		if($(".editMode").is(":visible")) {
+    			$(".editMode").hide();
+    			$("#editComputer").text("Edit");
+    		}
+    		else {
+    			$(".editMode").show();
+    			$("#editComputer").text("View");
+    		}
+    		break;
+    		
+    	case "fr":
+    		if($(".editMode").is(":visible")) {
+    			$(".editMode").hide();
+    			$("#editComputer").text("Editer");
+    		}
+    		else {
+    			$(".editMode").show();
+    			$("#editComputer").text("Vue");
+    		}
+    		break;
+    	}
         return this;
     };
 

@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.context.MessageSource;
 
 import dto.ComputerDTO;
 import form.AddForm;
@@ -33,13 +35,38 @@ public class IndexController {
 	@Autowired
 	private ComputerDtoMapper mapper;
 
+	@Autowired
+    private MessageSource messageSource;
+
+	
 	/*
 	 * 	Dashboard
 	 */
 
 	@RequestMapping(path = "/dashboard", method=RequestMethod.GET)
-	public String dashboardGet(@RequestParam(value = "nombre", required = false) String nombre, @RequestParam(value = "page", required = false) String page, ModelMap model) {
+	public String dashboardGet(@RequestParam(value = "nombre", required = false) String nombre, @RequestParam(value = "page", required = false) String page, ModelMap model, Locale locale) {
 
+		String computerFound = messageSource.getMessage("label.computersFound", null, locale);
+        model.addAttribute("computersFound", computerFound);
+        String name = messageSource.getMessage("label.name", null, locale);
+        model.addAttribute("name", name);
+        String introduced = messageSource.getMessage("label.introduced", null, locale);
+        model.addAttribute("introduced", introduced);
+        String discontinued = messageSource.getMessage("label.discontinued", null, locale);
+        model.addAttribute("discontinued", discontinued);
+        String company = messageSource.getMessage("label.company", null, locale);
+        model.addAttribute("company", company);
+        String filter = messageSource.getMessage("label.filter", null, locale);
+        model.addAttribute("filter", filter);
+        String search = messageSource.getMessage("label.search", null, locale);
+        model.addAttribute("search", search);
+        String addComputer = messageSource.getMessage("label.addComputer", null, locale);
+        model.addAttribute("addComputer", addComputer);
+        String edit = messageSource.getMessage("label.edit", null, locale);
+        model.addAttribute("edit", edit);
+        String view = messageSource.getMessage("label.view", null, locale);
+        model.addAttribute("view", view);
+        
 		List<Company> listCompany = companyServices.listCompany();
 		model.addAttribute("listcp", listCompany);
 
@@ -89,8 +116,28 @@ public class IndexController {
 	}
 
 	@RequestMapping(path = "/dashboard", method=RequestMethod.POST)
-	public String dashboardPost(@RequestParam(value = "search", required = false) String search, @RequestParam(value = "action", required = false) String action, @RequestParam(value = "selection", required = false) String selection, ModelMap model) {
+	public String dashboardPost(@RequestParam(value = "search", required = false) String search, @RequestParam(value = "action", required = false) String action, @RequestParam(value = "selection", required = false) String selection, ModelMap model, Locale locale) {
 
+		String computerFound = messageSource.getMessage("label.computersFound", null, locale);
+        model.addAttribute("computersFound", computerFound);
+        String name = messageSource.getMessage("label.name", null, locale);
+        model.addAttribute("name", name);
+        String introduced = messageSource.getMessage("label.introduced", null, locale);
+        model.addAttribute("introduced", introduced);
+        String discontinued = messageSource.getMessage("label.discontinued", null, locale);
+        model.addAttribute("discontinued", discontinued);
+        String company = messageSource.getMessage("label.company", null, locale);
+        model.addAttribute("company", company);
+        String filter = messageSource.getMessage("label.filter", null, locale);
+        model.addAttribute("filter", filter);
+        String search1 = messageSource.getMessage("label.search", null, locale);
+        model.addAttribute("search", search1);
+        String addComputer = messageSource.getMessage("label.addComputer", null, locale);
+        model.addAttribute("addComputer", addComputer);
+        String edit = messageSource.getMessage("label.edit", null, locale);
+        model.addAttribute("edit", edit);
+        String view = messageSource.getMessage("label.view", null, locale);
+        model.addAttribute("view", view);
 
 		if(action.equals("delete")) {
 			deleteComputer(selection);
@@ -131,7 +178,24 @@ public class IndexController {
 	 */
 
 	@RequestMapping(path = "/editComputer", method=RequestMethod.GET)
-	public String editGet(@RequestParam(value = "id", required = false) String sid, ModelMap model) {
+	public String editGet(@RequestParam(value = "id", required = false) String sid, ModelMap model, Locale locale) {
+		
+		String editComputerTitle = messageSource.getMessage("label.editComputerTitle", null, locale);
+        model.addAttribute("editComputerTitle", editComputerTitle);
+        String editComputerName = messageSource.getMessage("label.editComputerName", null, locale);
+        model.addAttribute("editComputerName", editComputerName);
+        String editComputerIntroduced = messageSource.getMessage("label.editComputerIntroduced", null, locale);
+        model.addAttribute("editComputerIntroduced", editComputerIntroduced);
+        String editComputerDiscontinued = messageSource.getMessage("label.editComputerDiscontinued", null, locale);
+        model.addAttribute("editComputerDiscontinued", editComputerDiscontinued);
+        String editComputerCompany = messageSource.getMessage("label.editComputerCompany", null, locale);
+        model.addAttribute("editComputerCompany", editComputerCompany);
+        String edit = messageSource.getMessage("label.edit", null, locale);
+        model.addAttribute("edit", edit);
+        String ou = messageSource.getMessage("label.ou", null, locale);
+        model.addAttribute("ou", ou);
+        String cancel = messageSource.getMessage("label.cancel", null, locale);
+        model.addAttribute("cancel", cancel);
 
 		List<Company> listCompany = companyServices.listCompany();
 		model.addAttribute("listcp", listCompany);
@@ -148,8 +212,8 @@ public class IndexController {
 	}
 
 	@RequestMapping(path = "/editComputer", method=RequestMethod.POST)
-	public String editPost(@ModelAttribute("editForm") final EditForm editForm, final Model model) {
-
+	public String editPost(@ModelAttribute("editForm") final EditForm editForm, final Model model, Locale locale) {
+		
 		ComputerDTO cdto = new ComputerDTO();
 
 		cdto.setId(editForm.getId());
@@ -163,7 +227,7 @@ public class IndexController {
 
 		pc = computerServices.updateComputer(pc);
 
-		return "dashboard";
+		return "redirect:dashboard";
 	}
 
 	/*
@@ -171,7 +235,24 @@ public class IndexController {
 	 */
 
 	@RequestMapping(path = "/addComputer", method=RequestMethod.GET)
-	public String addGet(ModelMap model) {
+	public String addGet(ModelMap model, Locale locale) {
+		
+		String addComputerTitle = messageSource.getMessage("label.addComputerTitle", null, locale);
+        model.addAttribute("addComputerTitle", addComputerTitle);
+        String addComputerName = messageSource.getMessage("label.addComputerName", null, locale);
+        model.addAttribute("addComputerName", addComputerName);
+        String addComputerIntroduced = messageSource.getMessage("label.addComputerIntroduced", null, locale);
+        model.addAttribute("addComputerIntroduced", addComputerIntroduced);
+        String addComputerDiscontinued = messageSource.getMessage("label.addComputerDiscontinued", null, locale);
+        model.addAttribute("addComputerDiscontinued", addComputerDiscontinued);
+        String addComputerCompany = messageSource.getMessage("label.addComputerCompany", null, locale);
+        model.addAttribute("addComputerCompany", addComputerCompany);
+        String add = messageSource.getMessage("label.add", null, locale);
+        model.addAttribute("add", add);
+        String ou = messageSource.getMessage("label.ou", null, locale);
+        model.addAttribute("ou", ou);
+        String cancel = messageSource.getMessage("label.cancel", null, locale);
+        model.addAttribute("cancel", cancel);
 
 		List<Company> listCompany = companyServices.listCompany();
 		model.addAttribute("listcp", listCompany);
@@ -183,8 +264,8 @@ public class IndexController {
 	}
 
 	@RequestMapping(path = "/addComputer", method=RequestMethod.POST)
-	public String addPost(@ModelAttribute("addForm") final AddForm addForm, final Model model) {
-
+	public String addPost(@ModelAttribute("addForm") final AddForm addForm, final Model model, Locale locale) {
+		
 		ComputerDTO cdto = new ComputerDTO();
 
 		cdto.setNom(addForm.getComputerName());
@@ -196,6 +277,6 @@ public class IndexController {
 
 		pc = computerServices.createComputer(pc);
 
-		return "dashboard";
+		return "redirect:dashboard";
 	}
 }

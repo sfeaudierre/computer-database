@@ -1,4 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <title>Computer Database</title>
@@ -13,8 +15,10 @@
 
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="dashboard"> Application - Computer
-				Database </a>
+			<a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
+		</div>
+		<div class="navbar-brand" style="margin-top:-50px;margin-left:67%;">
+			Language : <a href="?lang=en">English</a> | <a href="?lang=fr">French</a>
 		</div>
 	</header>
 
@@ -22,7 +26,7 @@
 		<div class="container">
 			<h1 id="homeTitle">
 				<c:out value="${count}" />
-				Computers found
+				${computersFound}
 			</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
@@ -30,16 +34,16 @@
 						method="POST" class="form-inline">
 
 						<input type="search" id="searchbox" name="search"
-							class="form-control" placeholder="Search name" /> <input
-							type="submit" id="searchsubmit" value="Filter by name"
+							class="form-control" placeholder="${search}" /> <input
+							type="submit" id="searchsubmit" value="${filter}"
 							class="btn btn-primary" />
 					</form>
 				</div>
 				<div class="pull-right">
 					<a class="btn btn-success" id="addComputer"
-						href="addComputer?action=add">Add Computer</a> <a
+						href="addComputer?action=add">${addComputer}</a> <a
 						class="btn btn-default" id="editComputer" href="#"
-						onclick="$.fn.toggleEditMode();">Edit</a>
+						onclick="$.fn.toggleEditMode();">${edit}</a>
 				</div>
 			</div>
 		</div>
@@ -62,12 +66,10 @@
 									class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span></th>
-						<th>Computer name</th>
-						<th>Introduced date</th>
-						<!-- Table header for Discontinued Date -->
-						<th>Discontinued date</th>
-						<!-- Table header for Company -->
-						<th>Company</th>
+						<th>${name}</th>
+						<th>${introduced}</th>
+						<th>${discontinued}</th>
+						<th>${company}</th>
 
 					</tr>
 				</thead>
