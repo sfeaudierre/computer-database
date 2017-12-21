@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 import dto.ComputerDTO;
+import model.Company;
 import model.Computer;
 
 @Component
@@ -34,13 +35,18 @@ public class ComputerDtoMapper{
 		else
 		sorti = df.format(computer.getDiscontinued());
 		
-		String companyId = String.valueOf(computer.getCompanyId());
-				 
+		Company company = computer.getCompany();
+			 
 		cdto.setId(id);
 		cdto.setNom(name);
 		cdto.setIntroduced(intro);			
 		cdto.setDiscontinued(sorti);
-		cdto.setCompanyId(companyId);
+		if(company == null) {
+			cdto.setCompanyId("");
+		}
+		else {
+			cdto.setCompanyId(String.valueOf(company.getId()));
+		}
 		
 		return cdto;
 	}
@@ -73,13 +79,21 @@ public class ComputerDtoMapper{
 			sqldsorti = Date.valueOf(dsorti);
 		}
 		
-		int companyId = Integer.valueOf(computerDto.getCompanyId());
+		int companyId;
+		if(computerDto.getCompanyId().equals("") || computerDto.getCompanyId() == null) {
+			companyId = 0;
+		}
+		else {
+			companyId = Integer.valueOf(computerDto.getCompanyId());
+		}
+		Company company = new Company();
+		company.setId(companyId);
 		
 		pc.setId(id);
 		pc.setNom(name);
 		pc.setIntroduced(sqldintro);			
 		pc.setDiscontinued(sqldsorti);
-		pc.setCompanyId(companyId);
+		pc.setCompany(company);
 		
 		return pc;
 	}

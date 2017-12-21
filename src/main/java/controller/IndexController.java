@@ -5,6 +5,10 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.context.MessageSource;
 
 import dto.ComputerDTO;
 import form.AddForm;
@@ -67,7 +70,7 @@ public class IndexController {
         String view = messageSource.getMessage("label.view", null, locale);
         model.addAttribute("view", view);
         
-		List<Company> listCompany = companyServices.listCompany();
+		Iterable<Company> listCompany = companyServices.listCompany();
 		model.addAttribute("listcp", listCompany);
 
 		listPaginator (nombre, page, model);
@@ -79,6 +82,8 @@ public class IndexController {
 
 
 		int pageid;
+		model.addAttribute("nombre", total);
+
 		if(page == null || page.isEmpty()) {
 			pageid = 1;
 			model.addAttribute("pageid", pageid);
@@ -91,26 +96,25 @@ public class IndexController {
 		if(nombre !=  null && !nombre.isEmpty()) {
 			if(Integer.valueOf(nombre) ==  10) {
 				total = 10;
+				model.addAttribute("nombre", total);
 			}
 			else if(Integer.valueOf(nombre) ==  50) {
 				total = 50;
+				model.addAttribute("nombre", total);
 			}
 			else if(Integer.valueOf(nombre) ==  100) {
 				total = 100;
+				model.addAttribute("nombre", total);
 			}
 		}
 
-		if(pageid != 1){
-			pageid=pageid-1;  
-			pageid=pageid*total+1;  
-		}  
-
-		List<Computer> listComputer = computerServices.listComputer(pageid, total);
+		Pageable pageable = PageRequest.of(pageid-1, total); 
+		Page<Computer> listComputer = computerServices.listAllComputer(pageable);
 		List<ComputerDTO> listPcDto =  listComputer.stream()
 				.map(computer -> mapper.computerToDto(computer))
 				.collect(Collectors.toList());
 
-		int count = computerServices.counting();
+		long count = computerServices.counting();
 		model.addAttribute("count", count);
 		model.addAttribute("searchPc", listPcDto.stream().collect(Collectors.toList()));
 	}
@@ -150,7 +154,7 @@ public class IndexController {
 	}
 	private void searchComputer(String search, ModelMap model) {
 
-		List<Company> listCompany = companyServices.listCompany();
+		Iterable<Company> listCompany = companyServices.listCompany();
 		model.addAttribute("listcp", listCompany);
 
 		List<Computer> searchPc = computerServices.searchComputer(search);
@@ -197,7 +201,7 @@ public class IndexController {
         String cancel = messageSource.getMessage("label.cancel", null, locale);
         model.addAttribute("cancel", cancel);
 
-		List<Company> listCompany = companyServices.listCompany();
+		Iterable<Company> listCompany = companyServices.listCompany();
 		model.addAttribute("listcp", listCompany);
 		
 		final EditForm form = new EditForm();
@@ -254,7 +258,7 @@ public class IndexController {
         String cancel = messageSource.getMessage("label.cancel", null, locale);
         model.addAttribute("cancel", cancel);
 
-		List<Company> listCompany = companyServices.listCompany();
+		Iterable<Company> listCompany = companyServices.listCompany();
 		model.addAttribute("listcp", listCompany);
 
 		final AddForm form = new AddForm();

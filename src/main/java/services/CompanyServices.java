@@ -1,28 +1,28 @@
 package services;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import dao.CompanyDAO;
+import dao.CompanyJpaRepository;
 import model.Company;
 
 @Component
 public class CompanyServices {
-
+	
 	@Autowired
-	CompanyDAO cydao;
+	CompanyJpaRepository companyJpaRepository;
 
-	public List<Company> listCompany() {
-		return cydao.findAll();
+	public Iterable<Company> listCompany() {
+		return companyJpaRepository.findAll();
 	}
 
-	public Company listOneCompany(int id) {
-		return cydao.find(id);
+	public Optional<Company> listOneCompany(int id) {
+		return companyJpaRepository.findById(id);
 	}
 
 	public void deleteCompany(Company company) {
-		cydao.delete(company);
+		companyJpaRepository.delete(company);
 	}
 }

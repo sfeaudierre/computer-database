@@ -3,46 +3,45 @@ package services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import dao.ComputerDAO;
+import dao.ComputerJpaRepository;
+//import dao.ComputerJpaRepository;
 import model.Computer;
 
 @Service
 public class ComputerServices {
-	
-	@Autowired
-	ComputerDAO cdao;
 
-	public List<Computer> listAllComputer() {
-		return cdao.findAll();
-	}
+	@Autowired
+	ComputerJpaRepository computerJpaRepository;
 	
-	public List<Computer> listComputer(int start, int total) {
-		return cdao.findAll(start, total);
+	public Page<Computer> listAllComputer(Pageable pageable) {
+		return computerJpaRepository.findAll(pageable);
 	}
 	
 	public Computer listOneComputer(int id) {
-		return cdao.find(id);
+		return computerJpaRepository.findById(id).get();
 	}
 	
 	public Computer createComputer(Computer computer) {
-		return cdao.create(computer);
+		return computerJpaRepository.save(computer);
 	}
 	
 	public Computer updateComputer(Computer computer) {
-		return cdao.update(computer);
+		return computerJpaRepository.save(computer);
 	}
 	
 	public void deleteComputer(Computer computer) {
-		cdao.delete(computer);
+		computerJpaRepository.delete(computer);
 	}
 
 	public List<Computer> searchComputer(String search) {
-		return cdao.findSearch(search);
+		return null;//return computerJpaRepository.findSearch(search);
 	}
 	
-	public int counting() {
-		return cdao.count();
+	public long counting() {
+		return computerJpaRepository.count();
 	}
 }
