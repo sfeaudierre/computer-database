@@ -109,7 +109,7 @@
 								value="${pageid-2}" /></a></li>
 					<li><a href="dashboard?page=${pageid-1}"><c:out
 								value="${pageid-1}" /></a></li>
-					<li><a style="font-weight: bold;background-color:lightblue;"
+					<li><a style="font-weight: bold;"
 						href="dashboard?page=${pageid}"><c:out value="${pageid}" /></a></li>
 					<li><a href="dashboard?page=${pageid+1}"><c:out
 								value="${pageid+1}" /></a></li>
@@ -118,7 +118,7 @@
 				</c:if>
 
 				<c:if test="${pageid == 1}">
-					<li><a style="font-weight: bold;background-color:lightblue;"
+					<li><a style="font-weight: bold;"
 						href="dashboard?page=${pageid}"><c:out value="${pageid}" /></a></li>
 					<li><a href="dashboard?page=${pageid+1}"><c:out
 								value="${pageid+1}" /></a></li>
@@ -133,7 +133,7 @@
 				<c:if test="${pageid == 2}">
 					<li><a href="dashboard?page=${pageid-1}"><c:out
 								value="${pageid-1}" /></a></li>
-					<li><a style="font-weight: bold;background-color:lightblue;"
+					<li><a style="font-weight: bold;"
 						href="dashboard?page=${pageid}"><c:out value="${pageid}" /></a></li>
 					<li><a href="dashboard?page=${pageid+1}"><c:out
 								value="${pageid+1}" /></a></li>
@@ -149,46 +149,19 @@
 			</ul>
 
 			<div class="btn-group btn-group-sm pull-right" role="group">
-			<c:if test="${nombre == 10}">
-				<a href="dashboard?nombre=10">
-					<button type="button" style="background-color:lightgrey;" class="btn btn-default"><span style="font-weight: bold;">10</span></button>
-				</a> 
-				<a href="dashboard?nombre=50">
-					<button type="button" class="btn btn-default">50</button>
-				</a> 
-				<a href="dashboard?nombre=100">
-					<button type="button" class="btn btn-default">100</button>
-				</a>
-			</c:if>
-			<c:if test="${nombre == 50}">
-				<a href="dashboard?nombre=10">
-					<button type="button" class="btn btn-default">10</button>
-				</a> 
-				<a href="dashboard?nombre=50">
-					<button type="button" style="background-color:lightgrey;" class="btn btn-default"><span style="font-weight: bold;">50</span></button>
-				</a> 
-				<a href="dashboard?nombre=100">
-					<button type="button" class="btn btn-default">100</button>
-				</a>
-			</c:if>
-			<c:if test="${nombre == 100}">
-				<a href="dashboard?nombre=10">
-					<button type="button" class="btn btn-default">10</button>
-				</a> 
-				<a href="dashboard?nombre=50">
-					<button type="button" class="btn btn-default">50</button>
-				</a> 
-				<a href="dashboard?nombre=100">
-					<button type="button" style="background-color:lightgrey;" class="btn btn-default"><span style="font-weight: bold;">100</span></button>
-				</a>
-			</c:if>
+				<a href="dashboard?nombre=10"><button type="button"
+						class="btn btn-default">10</button></a> <a href="dashboard?nombre=50"><button
+						type="button" class="btn btn-default">50</button></a> <a
+					href="dashboard?nombre=100"><button type="button"
+						class="btn btn-default">100</button></a>
 			</div>
 		</div>
 	</footer>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/form-validation.js"></script>
-	<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/dashboard.js"></script>
 

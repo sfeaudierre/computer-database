@@ -66,9 +66,6 @@ public class WebMvcConfig implements WebMvcConfigurer{
 
 		configurer.enable();
 
-	}
-
-	 
-
+	} 
 }
 
