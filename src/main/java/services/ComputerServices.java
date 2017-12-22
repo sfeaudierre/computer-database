@@ -38,7 +38,7 @@ public class ComputerServices {
 	}
 
 	public List<Computer> searchComputer(String search) {
-		return null;//return computerJpaRepository.findSearch(search);
+		return (List<Computer>) computerJpaRepository.findByName(search);
 	}
 	
 	public long counting() {

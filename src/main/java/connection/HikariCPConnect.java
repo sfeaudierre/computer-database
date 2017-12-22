@@ -26,12 +26,9 @@ import com.zaxxer.hikari.HikariDataSource;
 public class HikariCPConnect {
 
 	static DataSource datasource;
-	
+
 	@Resource
 	private Environment env;
-	
-	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
-	private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
 
 	@Bean
 	public static DataSource getConnection() {
@@ -68,9 +65,9 @@ public class HikariCPConnect {
 	private Properties hibProperties() {
 		Properties prop = new Properties();
 		try {
-		prop.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("/hibernate.properties"));
+			prop.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("/hibernate.properties"));
 		} catch(IOException e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
 		return prop;
 	}
