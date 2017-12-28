@@ -97,11 +97,21 @@
 	<footer class="navbar-fixed-bottom">
 		<div class="container text-center">
 			<ul class="pagination">
+				<c:if test="${pageid != 1}">
 				<li>
 					<a href="dashboard?page=${pageid-1}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					</a>
 				</li>
+				</c:if>
+				<c:if test="${pageid == 1}">
+				<li>
+					<a aria-label="Previous" aria-disabled="true">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				</c:if>
+				
 
 				<c:if test="${pageid > 2 && pageid < lastpage-1}">
 					<li>
@@ -115,7 +125,7 @@
 						</a>
 					</li>
 					<li>
-						<a style="font-weight: bold;background-color: lightblue;" href="dashboard?page=${pageid}">
+						<a style="font-weight: bold;background-color: lightblue;">
 							<c:out value="${pageid}" />
 						</a>
 					</li>
@@ -133,7 +143,7 @@
 
 				<c:if test="${pageid == 1}">
 					<li>
-						<a style="font-weight: bold;background-color: lightblue;" href="dashboard?page=${pageid}">
+						<a style="font-weight: bold;background-color: lightblue;">
 							<c:out value="${pageid}" />
 						</a>
 					</li>
@@ -166,7 +176,7 @@
 						</a>
 					</li>
 					<li>
-						<a style="font-weight: bold; background-color: lightblue;" href="dashboard?page=${pageid}">
+						<a style="font-weight: bold; background-color: lightblue;">
 							<c:out value="${pageid}" />
 						</a>
 					</li>
@@ -204,7 +214,7 @@
 						</a>
 					</li>
 					<li>
-						<a style="font-weight: bold;background-color: lightblue;" href="dashboard?page=${pageid}">
+						<a style="font-weight: bold;background-color: lightblue;">
 							<c:out value="${pageid}" />
 						</a>
 					</li>
@@ -237,17 +247,26 @@
 						</a>
 					</li>
 					<li>
-						<a style="font-weight: bold;background-color: lightblue;" href="dashboard?page=${pageid}">
+						<a style="font-weight: bold;background-color: lightblue;">
 							<c:out value="${pageid}" />
 						</a>
 					</li>
 				</c:if>
 
+				<c:if test="${pageid != lastpage}">
 				<li>
 					<a href="dashboard?page=${pageid+1}" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					</a>
 				</li>
+				</c:if>
+				<c:if test="${pageid == lastpage}">
+				<li>
+					<a aria-label="Next" aria-disabled="true">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				</c:if>
 			</ul>
 
 			<c:if test="${nombre == 10}">
