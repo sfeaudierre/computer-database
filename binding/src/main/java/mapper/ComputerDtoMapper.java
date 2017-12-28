@@ -13,7 +13,7 @@ import model.Computer;
 
 @Component
 public class ComputerDtoMapper{
-	
+	/*
 	public ComputerDTO computerToDto (Computer computer) {
 		
 		ComputerDTO cdto = new ComputerDTO();
@@ -97,5 +97,6 @@ public class ComputerDtoMapper{
 		
 		return pc;
 	}
+	*/
 }
 

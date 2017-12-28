@@ -25,25 +25,21 @@
 	<section id="main">
 		<div class="container">
 			<h1 id="homeTitle">
-				<c:out value="${count}" />
-				${computersFound}
+				<c:out value="${count}"/>
+				<spring:message code="label.computersFound"/>
 			</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
 					<form id="searchForm" action="dashboard?action=search"
 						method="POST" class="form-inline">
 
-						<input type="search" id="searchbox" name="search"
-							class="form-control" placeholder="${search}" /> <input
-							type="submit" id="searchsubmit" value="${filter}"
-							class="btn btn-primary" />
+						<input type="search" id="searchbox" name="search" class="form-control" placeholder="<spring:message code="label.search"/>"/> 
+							<input type="submit" id="searchsubmit" value="<spring:message code="label.filter"/>" class="btn btn-primary"/>
 					</form>
 				</div>
 				<div class="pull-right">
-					<a class="btn btn-success" id="addComputer"
-						href="addComputer?action=add">${addComputer}</a> <a
-						class="btn btn-default" id="editComputer" href="#"
-						onclick="$.fn.toggleEditMode();">${edit}</a>
+					<a class="btn btn-success" id="addComputer"	href="addComputer?action=add"><spring:message code="label.addComputer"/></a> 
+					<a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();"><spring:message code="label.edit"/></a>
 				</div>
 			</div>
 		</div>
@@ -59,31 +55,32 @@
 						<!-- Variable declarations for passing labels as parameters -->
 						<!-- Table header for Computer Name -->
 
-						<th class="editMode" style="width: 60px; height: 22px;"><input
-							type="checkbox" id="selectall" /> <span
-							style="vertical-align: top;"> - <a href=""
-								id="deleteSelected" onclick="$.fn.deleteSelected();"> <i
-									class="fa fa-trash-o fa-lg"></i>
-							</a>
-						</span></th>
-						<th>${name}</th>
-						<th>${introduced}</th>
-						<th>${discontinued}</th>
-						<th>${company}</th>
+						<th class="editMode" style="width: 60px; height: 22px;">
+						<input type="checkbox" id="selectall" /> 
+							<span style="vertical-align: top;"> - 
+								<a href="" id="deleteSelected" onclick="$.fn.deleteSelected();"> 
+									<i class="fa fa-trash-o fa-lg"></i>
+								</a>
+							</span>
+						</th>
+						<th><spring:message code="label.name"/></th>
+						<th><spring:message code="label.introduced"/></th>
+						<th><spring:message code="label.discontinued"/></th>
+						<th><spring:message code="label.company"/></th>
 
 					</tr>
 				</thead>
 				<!-- Browse attribute computers -->
 				<tbody id="results">
 
-					<c:forEach items="${searchPc}" var="pc">
+					<c:forEach items="${searchPc}" var="pc"> 
 						<tr>
 							<td class="editMode"><input type="checkbox" name="cb"
 								class="cb" value="${pc.id}"></td>
 							<td><a href="editComputer?action=edit&id=${pc.id}"
-								onclick=""><c:out value="${pc.nom}" /></a></td>
-							<td><c:out value="${pc.introduced}" /></td>
-							<td><c:out value="${pc.discontinued}" /></td>
+								onclick=""><c:out value="${pc.name}" /></a></td>
+							<td><c:out value="${pc.dateIntroduced}" /></td>
+							<td><c:out value="${pc.dateDiscontinued}" /></td>
 							<td><c:forEach items="${listcp}" var="cp">
 									<c:if test="${cp.id == pc.companyId}">
 										<c:out value="${cp.nom}" />
@@ -100,61 +97,200 @@
 	<footer class="navbar-fixed-bottom">
 		<div class="container text-center">
 			<ul class="pagination">
-				<li><a href="dashboard?page=${pageid-1}" aria-label="Previous">
+				<li>
+					<a href="dashboard?page=${pageid-1}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
-				</a></li>
+					</a>
+				</li>
 
-				<c:if test="${pageid > 2}">
-					<li><a href="dashboard?page=${pageid-2}"><c:out
-								value="${pageid-2}" /></a></li>
-					<li><a href="dashboard?page=${pageid-1}"><c:out
-								value="${pageid-1}" /></a></li>
-					<li><a style="font-weight: bold;"
-						href="dashboard?page=${pageid}"><c:out value="${pageid}" /></a></li>
-					<li><a href="dashboard?page=${pageid+1}"><c:out
-								value="${pageid+1}" /></a></li>
-					<li><a href="dashboard?page=${pageid+2}"><c:out
-								value="${pageid+2}" /></a></li>
+				<c:if test="${pageid > 2 && pageid < lastpage-1}">
+					<li>
+						<a href="dashboard?page=${pageid-2}">
+							<c:out value="${pageid-2}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid-1}">
+							<c:out value="${pageid-1}" />
+						</a>
+					</li>
+					<li>
+						<a style="font-weight: bold;background-color: lightblue;" href="dashboard?page=${pageid}">
+							<c:out value="${pageid}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid+1}">
+							<c:out value="${pageid+1}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid+2}">
+							<c:out value="${pageid+2}" />
+						</a>
+					</li>
 				</c:if>
 
 				<c:if test="${pageid == 1}">
-					<li><a style="font-weight: bold;"
-						href="dashboard?page=${pageid}"><c:out value="${pageid}" /></a></li>
-					<li><a href="dashboard?page=${pageid+1}"><c:out
-								value="${pageid+1}" /></a></li>
-					<li><a href="dashboard?page=${pageid+2}"><c:out
-								value="${pageid+2}" /></a></li>
-					<li><a href="dashboard?page=${pageid+3}"><c:out
-								value="${pageid+3}" /></a></li>
-					<li><a href="dashboard?page=${pageid+4}"><c:out
-								value="${pageid+4}" /></a></li>
+					<li>
+						<a style="font-weight: bold;background-color: lightblue;" href="dashboard?page=${pageid}">
+							<c:out value="${pageid}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid+1}">
+							<c:out value="${pageid+1}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid+2}">
+							<c:out value="${pageid+2}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid+3}">
+							<c:out value="${pageid+3}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid+4}">
+							<c:out value="${pageid+4}" />
+						</a>
+					</li>
 				</c:if>
 
 				<c:if test="${pageid == 2}">
-					<li><a href="dashboard?page=${pageid-1}"><c:out
-								value="${pageid-1}" /></a></li>
-					<li><a style="font-weight: bold;"
-						href="dashboard?page=${pageid}"><c:out value="${pageid}" /></a></li>
-					<li><a href="dashboard?page=${pageid+1}"><c:out
-								value="${pageid+1}" /></a></li>
-					<li><a href="dashboard?page=${pageid+2}"><c:out
-								value="${pageid+2}" /></a></li>
-					<li><a href="dashboard?page=${pageid+3}"><c:out
-								value="${pageid+3}" /></a></li>
+					<li>
+						<a href="dashboard?page=${pageid-1}">
+							<c:out value="${pageid-1}" />
+						</a>
+					</li>
+					<li>
+						<a style="font-weight: bold; background-color: lightblue;" href="dashboard?page=${pageid}">
+							<c:out value="${pageid}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid+1}">
+							<c:out value="${pageid+1}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid+2}">
+							<c:out value="${pageid+2}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid+3}">
+							<c:out value="${pageid+3}" />
+						</a>
+					</li>
+				</c:if>
+				
+				<c:if test="${pageid == lastpage-1}">
+					<li>
+						<a href="dashboard?page=${pageid-3}">
+							<c:out value="${pageid-3}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid-2}">
+							<c:out value="${pageid-2}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid-1}">
+							<c:out value="${pageid-1}" />
+						</a>
+					</li>
+					<li>
+						<a style="font-weight: bold;background-color: lightblue;" href="dashboard?page=${pageid}">
+							<c:out value="${pageid}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid+1}">
+							<c:out value="${pageid+1}" />
+						</a>
+					</li>
+				</c:if>
+				
+				<c:if test="${pageid == lastpage}">
+					<li>
+						<a href="dashboard?page=${pageid-4}">
+							<c:out value="${pageid-4}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid-3}">
+							<c:out value="${pageid-3}" />
+						</a>
+					</li>
+					<li>
+						<a  href="dashboard?page=${pageid-2}">
+							<c:out value="${pageid-2}" />
+						</a>
+					</li>
+					<li>
+						<a href="dashboard?page=${pageid-1}">
+							<c:out value="${pageid-1}" />
+						</a>
+					</li>
+					<li>
+						<a style="font-weight: bold;background-color: lightblue;" href="dashboard?page=${pageid}">
+							<c:out value="${pageid}" />
+						</a>
+					</li>
 				</c:if>
 
-				<li><a href="dashboard?page=${pageid+1}" aria-label="Next">
+				<li>
+					<a href="dashboard?page=${pageid+1}" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
-				</a></li>
+					</a>
+				</li>
 			</ul>
 
+			<c:if test="${nombre == 10}">
 			<div class="btn-group btn-group-sm pull-right" role="group">
-				<a href="dashboard?nombre=10"><button type="button"
-						class="btn btn-default">10</button></a> <a href="dashboard?nombre=50"><button
-						type="button" class="btn btn-default">50</button></a> <a
-					href="dashboard?nombre=100"><button type="button"
-						class="btn btn-default">100</button></a>
+				<a href="dashboard?nombre=10">
+					<button type="button" style="font-weight: bold; background-color: lightgrey;" class="btn btn-default">10</button>
+				</a> 
+				<a href="dashboard?nombre=50">
+					<button type="button" class="btn btn-default">50</button>
+				</a> 
+				<a href="dashboard?nombre=100">
+					<button type="button" class="btn btn-default">100</button>
+				</a>
 			</div>
+			</c:if>
+			
+			<c:if test="${nombre == 50}">
+			<div class="btn-group btn-group-sm pull-right" role="group">
+				<a href="dashboard?nombre=10">
+					<button type="button" class="btn btn-default">10</button>
+				</a> 
+				<a href="dashboard?nombre=50">
+					<button type="button" style="font-weight: bold; background-color: lightgrey;" class="btn btn-default">50</button>
+				</a> 
+				<a href="dashboard?nombre=100">
+					<button type="button" class="btn btn-default">100</button>
+				</a>
+			</div>
+			</c:if>
+			
+			<c:if test="${nombre == 100}">
+			<div class="btn-group btn-group-sm pull-right" role="group">
+				<a href="dashboard?nombre=10">
+					<button type="button" class="btn btn-default">10</button>
+				</a> 
+				<a href="dashboard?nombre=50">
+					<button type="button" class="btn btn-default">50</button>
+				</a> 
+				<a href="dashboard?nombre=100">
+					<button type="button" style="font-weight: bold; background-color: lightgrey;" class="btn btn-default">100</button>
+				</a>
+			</div>
+			</c:if>
 		</div>
 	</footer>
 

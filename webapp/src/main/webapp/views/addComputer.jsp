@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
@@ -25,23 +26,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-2 box">
-                    <h1>${addComputerTitle}</h1>
-                    <form:form modelAttribute="addForm" action="addComputer?action=add" name="form" id="form" method="POST">
+                    <h1><spring:message code="label.addComputerTitle"/></h1> 
+                    <form:form modelAttribute="addForm" action="addComputer?action=add" name="form" id="form" method="POST"> 
                         <fieldset>
                             <div class="form-group">
-                                <label for="computerName">${addComputerName}</label>
-                                <form:input type="text" class="form-control" path="computerName" name="computerName" id="computerName" placeholder="${addComputerName}"/>
+                                <label for="computerName"><spring:message code="label.addComputerName"/></label>
+                                <form:input type="text" class="form-control" path="computerName" name="computerName" id="computerName" placeholder="PC"/>
                             </div>
                             <div class="form-group">
-                                <label for="introduced">${addComputerIntroduced}</label>
-                                <form:input type="date" class="form-control" path="introduced" name="introduced" id="introduced" placeholder="${addComputerIntroduced}"/>
+                                <label for="introduced"><spring:message code="label.addComputerIntroduced"/></label>
+                                <form:input type="date" class="form-control" path="introduced" name="introduced" id="introduced" placeholder="yyyy/mm/dd"/>
                             </div>
                             <div class="form-group">
-                                <label for="discontinued">${addComputerDiscontinued}</label>
-                                <form:input type="date" class="form-control" path="discontinued" name="discontinued" id="discontinued" placeholder="${addComputerDiscontinued}"/>
+                                <label for="discontinued"><spring:message code="label.addComputerDiscontinued"/></label>
+                                <form:input type="date" class="form-control" path="discontinued" name="discontinued" id="discontinued" placeholder="yyyy/mm/dd"/>
                             </div>
                             <div class="form-group">
-                                <label for="companyId">${addComputerCompany}</label>
+                                <label for="companyId"><spring:message code="label.addComputerCompany"/></label>
                                 <form:select class="form-control" path="companyId" name="companyId" id="companyId" >
                                		<c:forEach items="${listcp}" var="cp">
                                     	<option value="${cp.id}"><c:out value="${cp.nom}"></c:out></option>
@@ -50,9 +51,9 @@
                             </div>                  
                         </fieldset>
                         <div class="actions pull-right">
-                            <input type="submit" value="${add}" class="btn btn-primary">
-                            ${ou}
-                            <a href="dashboard" class="btn btn-default">${cancel}</a>
+                            <input type="submit" value="<spring:message code="label.add"/>" class="btn btn-primary">
+                            <spring:message code="label.ou"/>
+                            <a href="dashboard" class="btn btn-default"><spring:message code="label.cancel"/></a>
                         </div>
                     </form:form>
                     <script>

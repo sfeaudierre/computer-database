@@ -1,4 +1,4 @@
-package connection;
+package configuration;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -31,7 +31,7 @@ public class HikariCPConnect {
 	private Environment env;
 
 	@Bean
-	public static DataSource getConnection() {
+	public DataSource getConnection() {
 
 		if (datasource == null) {
 			String configFile = "/db.properties";

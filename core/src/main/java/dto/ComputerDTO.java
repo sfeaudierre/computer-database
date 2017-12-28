@@ -1,64 +1,67 @@
 package dto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ComputerDTO {
-	
+
 	private String id;
-	
-	@Size(min=2, max=30)
-	@NotNull
-	@Pattern(regexp = "{A-Za-z0-9}*$")
 	private String name;
-	
-	private String introduced;
-	
-	private String discontinued;
-	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private String dateIntroduced;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private String dateDiscontinued;
 	private String companyId;
+	private String companyName;
 	
-	public ComputerDTO() {}
+	public ComputerDTO(){}
 	
-	public ComputerDTO(String id, String name, String introduced, String discontinued, String companyId) {
-		
+	public ComputerDTO(String id, String name, String dateIntroduced, String dateDiscontinued, String companyId,
+			String companyName) {
+		super();
 		this.id = id;
 		this.name = name;
-		this.introduced = introduced;
-		this.discontinued = discontinued;
+		this.dateIntroduced = dateIntroduced;
+		this.dateDiscontinued = dateDiscontinued;
 		this.companyId = companyId;
+		this.companyName = companyName;
 	}
 	
 	public String getId() {
 		return id;
 	}
-	public String getNom() {
+	public void setId(String string) {
+		this.id = string;
+	}
+	public String getName() {
 		return name;
 	}
-	public String getIntroduced() {
-		return introduced;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getDiscontinued() {
-		return discontinued;
+	public String getDateIntroduced() {
+		return dateIntroduced;
+	}
+	public void setDateIntroduced(String dateIntroduced) {
+		this.dateIntroduced = dateIntroduced;
+	}
+	public String getDateDiscontinued() {
+		return dateDiscontinued;
+	}
+	public void setDateDiscontinued(String dateDiscontinued) {
+		this.dateDiscontinued = dateDiscontinued;
 	}
 	public String getCompanyId() {
 		return companyId;
 	}
-	
-	public void setId(String id) {
-		this.id = id;
+	public void setCompanyId(String string) {
+		this.companyId = string;
 	}
-	public void setNom(String name) {
-		this.name = name;
+	public String getCompanyName() {
+		return companyName;
 	}
-	public void setIntroduced(String introduced) {
-		this.introduced = introduced;
-	}
-	public void setDiscontinued(String discontinued) {
-		this.discontinued = discontinued;
-	}
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 }

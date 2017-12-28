@@ -5,8 +5,10 @@ import java.util.Locale;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -16,11 +18,13 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-
+ 
 @Configuration
-@EnableWebMvc
+@EnableWebMvc 
+@EnableWebSecurity
 @EnableJpaRepositories(basePackages = "dao")
-@ComponentScan(basePackages = { "configuration", "connection", "controller", "dao", "dto", "initializer", "main", "mapper", "model", "services", "servlets", "singleton" })
+@ComponentScan(basePackages = { "configuration", "connection", "controller", "dao", "dto", "initializer", "main", "mappers", "model", "services", "servlets", "singleton" })
+@Import({ SecurityConfig.class })
 public class WebMvcConfig implements WebMvcConfigurer{
 
 	@Bean
@@ -63,9 +67,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-
 		configurer.enable();
-
 	} 
 }
 

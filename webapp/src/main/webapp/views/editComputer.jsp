@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
@@ -26,25 +27,25 @@
                     <div class="label label-default pull-right">
                         id:<c:out value="${pcDto.id}"/>
                     </div>
-                    <h1>${editComputerTitle}</h1>
+                    <h1><spring:message code="label.editComputerTitle"/></h1>
 
                     <form action="editComputer?action=edit" name="form" id="form" method="POST">
                         <input type="hidden" value="${pcDto.id}" id="id" name="id"/> <!-- TODO: Change this value with the computer id -->
                         <fieldset>
                             <div class="form-group">
-                                <label for="computerName">${editComputerName}</label>
-                                <input type="text" class="form-control" name="computerName" id="computerName" placeholder="${editComputerName}" value="${pcDto.nom}" >
+                                <label for="computerName"><spring:message code="label.editComputerName"/></label>
+                                <input type="text" class="form-control" name="computerName" id="computerName" placeholder="PC" value="${pcDto.name}" >
                             </div>
                             <div class="form-group">
-                                <label for="introduced">${editComputerIntroduced}</label>
-                                <input type="date" class="form-control" name="introduced" id="introduced" placeholder="${editComputerIntroduced}"value="${pcDto.introduced}">
+                                <label for="introduced"><spring:message code="label.editComputerIntroduced"/></label>
+                                <input type="date" class="form-control" name="introduced" id="introduced" placeholder="yy/mm/dd"value="${pcDto.dateIntroduced}">
                             </div>
                             <div class="form-group">
-                                <label for="discontinued">${editComputerDiscontinued}</label>
-                                <input type="date" class="form-control" name="discontinued" id="discontinued" placeholder="${editComputerDiscontinued}"value="${pcDto.discontinued}">
+                                <label for="discontinued"><spring:message code="label.editComputerDiscontinued"/></label>
+                                <input type="date" class="form-control" name="discontinued" id="discontinued" placeholder="yy/mm/dd"value="${pcDto.dateDiscontinued}">
                             </div>
                             <div class="form-group">
-                                <label for="companyId">${editComputerCompany}</label>
+                                <label for="companyId"><spring:message code="label.editComputerCompany"/></label>
                                 <select class="form-control" id="companyId" name="companyId">
                                     <c:forEach items="${listcp}" var="cp">
                                     	<option value="${cp.id}"><c:out value="${cp.nom}"></c:out></option>
@@ -53,9 +54,9 @@
                             </div>            
                         </fieldset>
                         <div class="actions pull-right">
-                            <input type="submit" value="${edit}" class="btn btn-primary">
-                            ${ou}
-                            <a href="dashboard" class="btn btn-default">${cancel}</a>
+                            <input type="submit" value="<spring:message code="label.edit"/>" class="btn btn-primary">
+                            <spring:message code="label.ou"/>
+                            <a href="dashboard" class="btn btn-default"><spring:message code="label.cancel"/></a>
                         </div>
                     </form>
                      <script>

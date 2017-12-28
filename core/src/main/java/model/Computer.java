@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,14 +17,14 @@ public class Computer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private java.sql.Date introduced;
-	private java.sql.Date discontinued;
+	private LocalDate introduced;
+	private LocalDate discontinued;
 	@ManyToOne
 	private Company company;
 	
 		public Computer() {}
 	
-		public Computer(int id, String name, Date introduced, Date discontinued, Company company) {
+		public Computer(int id, String name, LocalDate introduced, LocalDate discontinued, Company company) {
 			
 			this.id = id;
 			this.name = name;
@@ -40,10 +40,10 @@ public class Computer {
 		public String getNom() {
 			return name;
 		}
-		public Date getIntroduced() {
+		public LocalDate getIntroduced() {
 			return introduced;
 		}
-		public Date getDiscontinued() {
+		public LocalDate getDiscontinued() {
 			return discontinued;
 		}
 		public Company getCompany() {
@@ -56,10 +56,10 @@ public class Computer {
 		public void setNom(String name) {
 			this.name = name;
 		}
-		public void setIntroduced(Date introduced) {
+		public void setIntroduced(LocalDate introduced) {
 			this.introduced = introduced;
 		}
-		public void setDiscontinued(Date discontinued) {
+		public void setDiscontinued(LocalDate discontinued) {
 			this.discontinued = discontinued;
 		}
 		public void setCompany(Company company) {
