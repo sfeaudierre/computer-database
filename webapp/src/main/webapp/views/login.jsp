@@ -18,9 +18,10 @@
         <div class="container">
             <a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
         </div>
-        <div class="navbar-brand" style="margin-top:-50px;margin-left:67%;">
+		<div class="navbar-brand" style="margin-top:-50px;margin-left:60%;">
 			Language : <a href="?lang=en">English</a> | <a href="?lang=fr">French</a>
 		</div>
+		
     </header>
 
     <section id="main">

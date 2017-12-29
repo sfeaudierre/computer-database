@@ -17,8 +17,16 @@
         <div class="container">
             <a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
         </div>
-        <div class="navbar-brand" style="margin-top:-50px;margin-left:67%;">
+		<div class="navbar-brand" style="margin-top:-50px;margin-left:60%;">
 			Language : <a href="?lang=en">English</a> | <a href="?lang=fr">French</a>
+		</div>
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+		<div class="navbar-brand" style="margin-top:-50px;margin-left:45%;">
+			Welcome : <a href="#">${pageContext.request.userPrincipal.name}</a>
+		</div>
+		</c:if>
+		<div class="navbar-brand" style="margin-top:-57px;margin-left:74%;">
+			<a	class="btn btn-danger" href="login" role="button"><spring:message code="label.logout" /></a>
 		</div>
     </header>
 
