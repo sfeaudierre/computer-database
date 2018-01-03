@@ -1,5 +1,6 @@
 package services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,10 @@ public class ComputerServices {
 
 	public List<Computer> searchComputer(String search) {
 		return (List<Computer>) computerJpaRepository.findByName(search);
+	}
+	
+	public List<Computer> searchComputerByDate(LocalDate date) {
+		return (List<Computer>) computerJpaRepository.findByDate(date);
 	}
 	
 	public long counting() {

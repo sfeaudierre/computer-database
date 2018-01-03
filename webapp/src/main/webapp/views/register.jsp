@@ -24,40 +24,41 @@
 		
     </header>
 
+   
+    
     <section id="main">
         <div class="container">
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-2 box">
                 <table>
 					<tr>
-						<td class="error" colspan="2" style="color: red;">
+						<td class="error" colspan="2" style="color: green;">
 							<c:if test="${not empty error}"> ${error}</c:if>
 						</td>
 					</tr>
 				</table>
-                    <h1><spring:message code="label.loginTitle"/></h1>
-                    <form name="loginForm" action="<c:url value='spring_security'/>" method="POST"> 
+                    <h1><spring:message code="label.registerTitle"/></h1>
+                    <form name="registerForm" action="<c:url value='register'/>" method="POST"> 
                         <fieldset>
                             <div class="form-group">
-                                <label for="username"><spring:message code="label.id"/></label>
-                                <input type="text" class="form-control" name="username" id="username" placeholder="<spring:message code="label.id"/>"/>
+                                <label for="name"><spring:message code="label.id"/></label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="<spring:message code="label.id"/>"/>
                             </div>
                             <div class="form-group">
                                 <label for="password"><spring:message code="label.password"/></label> 
-                                <input type="password" class="form-control" name="password" id="password" placeholder="**********"/>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="<spring:message code="label.password"/>"/>
                             </div>
                         </fieldset>
                         <div class="actions pull-right">
-                            <input type="submit" value="<spring:message code="label.login"/>" class="btn btn-primary">
+                            <input type="submit" value="<spring:message code="label.register"/>" class="btn btn-primary">
                             <spring:message code="label.ou"/>
-                            <a href="register" class="btn btn-default"><spring:message code="label.register"/></a>
+                            <a href="login" class="btn btn-default"><spring:message code="label.login"/></a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-    
   
 </body>
 </html>

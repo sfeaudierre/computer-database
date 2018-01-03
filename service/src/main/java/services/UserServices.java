@@ -17,23 +17,28 @@ import model.User;
 public class UserServices implements UserDetailsService{
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserServices.class);
 
-    private UserRepository userRepository;
+	UserRepository userRepository;
 
 	public UserServices(UserRepository ur) {
 		LOGGER.info("build user service");
 		userRepository=ur;
 	}
-	
+
 	@Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		LOGGER.info("load user");
-		User user = userRepository.findByName(username);
+	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+		LOGGER.info("load user"+name+"gvgvgvgv");
+		User user = userRepository.findByName(name);
 		LOGGER.info(user.getName()+" "+ user.getPassword());
-        return new org.springframework.security.core.userdetails.User(user.getName(),
-                                                                      user.getPassword(),
-                                                                      user.getRoles().stream()
-                                                                                     .map(x -> new SimpleGrantedAuthority(x.getName()))
-                                                                                     .collect(Collectors.toSet())
-                                                                     );
-    }
+		return new org.springframework.security.core.userdetails.User(user.getName(),
+				user.getPassword(),
+				user.getRoles().stream()
+				.map(x -> new SimpleGrantedAuthority(x.getName()))
+				.collect(Collectors.toSet())
+				);
+	}
+
+	public User createUser(User user) {
+		LOGGER.info(user.getName()+" "+ user.getPassword());
+		return userRepository.save(user);
+	}
 }

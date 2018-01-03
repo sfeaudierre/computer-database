@@ -28,14 +28,14 @@ $(function() {
     messages: {
       computerName: "Please enter the name",
       introduced: {
-        maxlength: "The date must be yyyy/mm/dd",
-        minlength: "The date must be yyyy/mm/dd",
-        date: "The date must be yyyy/mm/dd"
+        maxlength: "The date must be yyyy-mm-dd",
+        minlength: "The date must be yyyy-mm-dd",
+        date: "The date must be yyyy-mm-dd"
       },
       discontinued: {
-          maxlength: "The date must be yyyy/mm/dd",
-          minlength: "The date must be yyyy/mm/dd",
-          date: "The date must be yyyy/mm/dd"
+          maxlength: "The date must be yyyy-mm-dd",
+          minlength: "The date must be yyyy-mm-dd",
+          date: "The date must be yyyy-mm-dd"
       },   
      },
     // Make sure the form is submitted to the destination defined

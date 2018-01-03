@@ -19,15 +19,18 @@
 			<a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
 		</div>
 		<div class="navbar-brand" style="margin-top:-50px;margin-left:60%;">
-			Language : <a href="?lang=en">English</a> | <a href="?lang=fr">French</a>
+			<spring:message code="label.language"/> : <a href="?lang=en">English</a> | <a href="?lang=fr">French</a>
 		</div>
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
 		<div class="navbar-brand" style="margin-top:-50px;margin-left:45%;">
-			Welcome : <a href="#">${pageContext.request.userPrincipal.name}</a>
+			<spring:message code="label.welcome"/> : <a href="#">${pageContext.request.userPrincipal.name}</a>
 		</div>
 		</c:if>
 		<div class="navbar-brand" style="margin-top:-57px;margin-left:74%;">
-			<a	class="btn btn-danger" href="login" role="button"><spring:message code="label.logout" /></a>
+       <form action="<%=request.getContextPath()%>/spring_logout" method="POST">	
+ 			<input type="submit" class="btn btn-danger" value="<spring:message code="label.logout"/>"/>
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+       </form>      
 		</div>
 		
 	</header>
@@ -44,7 +47,15 @@
 						method="POST" class="form-inline">
 
 						<input type="search" id="searchbox" name="search" class="form-control" placeholder="<spring:message code="label.search"/>"/> 
-							<input type="submit" id="searchsubmit" value="<spring:message code="label.filter"/>" class="btn btn-primary"/>
+							<input type="submit" id="searchsubmit" value="<spring:message code="label.filterByName"/>" class="btn btn-primary"/>
+					</form>
+				</div>
+				<div class="pull-left" style="margin-left:7%;">
+					<form id="searchForm" action="dashboard?action=searchByDate"
+						method="POST" class="form-inline">
+
+						<input type="search" id="searchboxByDate" name="searchByDate" class="form-control" placeholder="<spring:message code="label.searchByDate"/>"/> 
+							<input type="submit" id="searchsubmit" value="<spring:message code="label.filterByDate"/>" class="btn btn-primary"/>
 					</form>
 				</div>
 				<div class="pull-right">
@@ -82,7 +93,7 @@
 				</thead>
 				<!-- Browse attribute computers -->
 				<tbody id="results">
-
+					<c:if test="${searchPc != null}">
 					<c:forEach items="${searchPc}" var="pc"> 
 						<tr>
 							<td class="editMode"><input type="checkbox" name="cb"
@@ -98,7 +109,7 @@
 								</c:forEach></td>
 						</tr>
 					</c:forEach>
-
+					</c:if>
 				</tbody>
 			</table>
 		</div>
@@ -107,23 +118,29 @@
 	<footer class="navbar-fixed-bottom">
 		<div class="container text-center">
 			<ul class="pagination">
-				<c:if test="${pageid != 1}">
+				<c:if test="${pageid != 1 && flag != 10}">
 				<li>
 					<a href="dashboard?page=${pageid-1}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					</a>
 				</li>
 				</c:if>
-				<c:if test="${pageid == 1}">
+				<c:if test="${pageid == 1 && flag != 10}">
 				<li>
 					<a aria-label="Previous" aria-disabled="true">
 						<span aria-hidden="true">&laquo;</span>
 					</a>
 				</li>
 				</c:if>
-				
+				<c:if test="${flag == 10}">
+				<li>
+					<a style="font-weight: bold;background-color: lightblue;">
+						<c:out value="1"/>
+					</a>
+				</li>
+				</c:if>
 
-				<c:if test="${pageid > 2 && pageid < lastpage-1}">
+				<c:if test="${pageid > 2 && pageid < lastpage-1 && flag != 10}">
 					<li>
 						<a href="dashboard?page=${pageid-2}">
 							<c:out value="${pageid-2}" />
@@ -151,7 +168,7 @@
 					</li>
 				</c:if>
 
-				<c:if test="${pageid == 1}">
+				<c:if test="${pageid == 1 && flag != 10}">
 					<li>
 						<a style="font-weight: bold;background-color: lightblue;">
 							<c:out value="${pageid}" />
@@ -179,7 +196,7 @@
 					</li>
 				</c:if>
 
-				<c:if test="${pageid == 2}">
+				<c:if test="${pageid == 2 && flag != 10}">
 					<li>
 						<a href="dashboard?page=${pageid-1}">
 							<c:out value="${pageid-1}" />
@@ -207,7 +224,7 @@
 					</li>
 				</c:if>
 				
-				<c:if test="${pageid == lastpage-1}">
+				<c:if test="${pageid == lastpage-1 && flag != 10}">
 					<li>
 						<a href="dashboard?page=${pageid-3}">
 							<c:out value="${pageid-3}" />
@@ -235,7 +252,7 @@
 					</li>
 				</c:if>
 				
-				<c:if test="${pageid == lastpage}">
+				<c:if test="${pageid == lastpage && flag != 10}">
 					<li>
 						<a href="dashboard?page=${pageid-4}">
 							<c:out value="${pageid-4}" />
@@ -263,14 +280,14 @@
 					</li>
 				</c:if>
 
-				<c:if test="${pageid != lastpage}">
+				<c:if test="${pageid != lastpage && flag != 10}">
 				<li>
 					<a href="dashboard?page=${pageid+1}" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					</a>
 				</li>
 				</c:if>
-				<c:if test="${pageid == lastpage}">
+				<c:if test="${pageid == lastpage && flag != 10}">
 				<li>
 					<a aria-label="Next" aria-disabled="true">
 						<span aria-hidden="true">&raquo;</span>
@@ -279,7 +296,21 @@
 				</c:if>
 			</ul>
 
-			<c:if test="${nombre == 10}">
+			<c:if test="${flag == 10}">
+			<div class="btn-group btn-group-sm pull-right" role="group">
+				<a href="#">
+					<button type="button" class="btn btn-default">10</button>
+				</a> 
+				<a href="#">
+					<button type="button" class="btn btn-default">50</button>
+				</a> 
+				<a href="#">
+					<button type="button" class="btn btn-default">100</button>
+				</a>
+			</div>
+			</c:if>
+
+			<c:if test="${nombre == 10 && flag != 10}">
 			<div class="btn-group btn-group-sm pull-right" role="group">
 				<a href="dashboard?nombre=10">
 					<button type="button" style="font-weight: bold; background-color: lightgrey;" class="btn btn-default">10</button>
@@ -293,7 +324,7 @@
 			</div>
 			</c:if>
 			
-			<c:if test="${nombre == 50}">
+			<c:if test="${nombre == 50 && flag != 10}">
 			<div class="btn-group btn-group-sm pull-right" role="group">
 				<a href="dashboard?nombre=10">
 					<button type="button" class="btn btn-default">10</button>
@@ -307,7 +338,7 @@
 			</div>
 			</c:if>
 			
-			<c:if test="${nombre == 100}">
+			<c:if test="${nombre == 100 && flag != 10}">
 			<div class="btn-group btn-group-sm pull-right" role="group">
 				<a href="dashboard?nombre=10">
 					<button type="button" class="btn btn-default">10</button>
