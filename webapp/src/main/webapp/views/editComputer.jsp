@@ -25,7 +25,10 @@
 		</div>
 		</c:if>
 		<div class="navbar-brand" style="margin-top:-57px;margin-left:74%;">
-			<a	class="btn btn-danger" href="login" role="button"><spring:message code="label.logout" /></a>
+       <form action="<%=request.getContextPath()%>/spring_logout" method="POST">	
+ 			<input type="submit" class="btn btn-danger" value="<spring:message code="label.logout"/>"/>
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+       </form>      
 		</div>
     </header>
     <section id="main">

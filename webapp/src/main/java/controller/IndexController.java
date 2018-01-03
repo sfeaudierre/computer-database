@@ -35,8 +35,8 @@ import services.UserServices;
 public class IndexController {
 
 	private int total = 10;
-	private int flag =0;
-	
+	private int flag = 0;
+	private int registered = 0;
 	@Autowired
 	private ComputerServices computerServices;
 	@Autowired
@@ -60,26 +60,26 @@ public class IndexController {
 		}
 		return "login";
 	}
-	
+
 	/*
 	 * 	Register
 	 */
-	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String registerGet(@RequestParam(value = "register", required = false) String register, Model model) {
 
-		if (register != null) {
-			model.addAttribute("register", "you've successfully registered !");
-		}
-		return "register?register";
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String registerGet(Model model) {
+
+		model.addAttribute("registered", registered);
+		model.addAttribute("register", "you've successfully registered !");
+		registered = 0;
+		return "register";
 	}
-	
-	
+
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerPost(@ModelAttribute("registerForm") final RegisterForm registerForm, Model model) {
 
 		User user = new User();
-		
+
 		user.setName(registerForm.getName());
 		String password = registerForm.getPassword();
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -87,7 +87,8 @@ public class IndexController {
 		user.setPassword(hashedPassword);
 		user.setRole(roleRepository.findByName("ROLE_USER"));		
 		user = userServices.createUser(user);
-		return "register";
+		registered = 1;
+		return "redirect:register";
 	}
 
 	/*
@@ -127,10 +128,10 @@ public class IndexController {
 				model.addAttribute("nombre", total);
 			}
 		}
-		
+
 		int lastpage = (int) ((count+total)/total);
 		model.addAttribute("lastpage", lastpage);
-		
+
 		if(page == null || Integer.valueOf(page) <= 0 || page.isEmpty()) {
 			pageid = 1;
 			model.addAttribute("pageid", pageid);
@@ -186,12 +187,12 @@ public class IndexController {
 
 		long count = searchPc.stream().collect(Collectors.counting());
 		flag = 10;
-		
+
 		model.addAttribute("count", count);
 		model.addAttribute("flag", flag);
 		model.addAttribute("searchPc", listPcDto.stream().collect(Collectors.toList()));
 	}
-	
+
 	private void searchComputerByDate(LocalDate date, ModelMap model) {
 
 		Iterable<Company> listCompany = companyServices.listCompany();
@@ -204,7 +205,7 @@ public class IndexController {
 
 		long count = searchPcByDate.stream().collect(Collectors.counting());
 		flag = 10;
-		
+
 		model.addAttribute("count", count);
 		model.addAttribute("flag", flag);
 		model.addAttribute("searchPc", listPcDto.stream().collect(Collectors.toList()));

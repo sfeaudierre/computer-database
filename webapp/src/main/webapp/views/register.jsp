@@ -33,7 +33,7 @@
                 <table>
 					<tr>
 						<td class="error" colspan="2" style="color: green;">
-							<c:if test="${not empty error}"> ${error}</c:if>
+							<c:if test="${registered == 1}"> ${register}</c:if>
 						</td>
 					</tr>
 				</table>

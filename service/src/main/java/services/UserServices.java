@@ -26,9 +26,8 @@ public class UserServices implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-		LOGGER.info("load user"+name+"gvgvgvgv");
 		User user = userRepository.findByName(name);
-		LOGGER.info(user.getName()+" "+ user.getPassword());
+		LOGGER.info("Load User "+user.getName()+" "+ user.getPassword());
 		return new org.springframework.security.core.userdetails.User(user.getName(),
 				user.getPassword(),
 				user.getRoles().stream()
@@ -38,7 +37,7 @@ public class UserServices implements UserDetailsService{
 	}
 
 	public User createUser(User user) {
-		LOGGER.info(user.getName()+" "+ user.getPassword());
+		LOGGER.info("Create User "+user.getName()+" "+ user.getPassword());
 		return userRepository.save(user);
 	}
 }
